@@ -16,6 +16,9 @@ opt.fixendofline = true
 -- Disables conceal level
 opt.conceallevel = 0
 
+-- Creates two vertical columns
+vim.opt.colorcolumn = "80,120"
+
 -- Performance stuff
 g.lazyredraw = true
 opt.updatetime = 50
