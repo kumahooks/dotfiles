@@ -4,6 +4,7 @@ local map = vim.keymap.set
 
 -- Remaps ; to : to quickly enter command mode
 map("n", ";", ":", { desc = "CMD enter command mode" })
+
 -- Exit insert with "jk"
 map("i", "jk", "<ESC>")
 
