@@ -12,7 +12,6 @@ local servers = {
 	"cssls",
 	"bashls",
 	"yamlls",
-	"htmx",
 	"marksman",
 	"asm_lsp",
 	lua_ls = {
@@ -34,7 +33,7 @@ for _, server in ipairs(servers) do
 	local server_name = type(server) == "string" and server or server[1]
 	local server_opts = type(server) == "string" and {} or server[2]
 
-	if server_name == "tsserver" then
+	if server_name == "ts_ls" then
 		server_opts.filetypes = {
 			"javascript",
 			"javascriptreact",
