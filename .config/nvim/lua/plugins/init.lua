@@ -39,9 +39,6 @@ return {
 				"rust-analyzer",
 				"yaml-language-server",
 
-				-- DAPs
-				"js-debug-adapter",
-
 				-- Formatters
 				"black",
 				"clang-format",
