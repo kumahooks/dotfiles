@@ -1,11 +1,11 @@
 local options = {
 	formatters_by_ft = {
 		lua = { "stylua" },
-		javascript = { "prettierd", "--trailing-comma=none" },
-		typescript = { "prettierd", "--trailing-comma=none" },
-		json = { "prettierd", "--trailing-comma=none" },
-		html = { "prettierd", "--trailing-comma=none" },
-		css = { "prettierd", "--trailing-comma=none" },
+		--javascript = { "prettier" },
+		--typescript = { "prettierd", "--trailing-comma=none", "--use-tabs", "--tab-width=4" },
+		--json = { "prettierd", "--trailing-comma=none", "--use-tabs", "--tab-width=4" },
+		--html = { "prettierd", "--trailing-comma=none", "--use-tabs", "--tab-width=4" },
+		--css = { "prettierd", "--trailing-comma=none", "--use-tabs", "--tab-width=4" },
 		go = { "gofmt" },
 		rust = { "rustfmt" },
 		c = { "clang_format" },
