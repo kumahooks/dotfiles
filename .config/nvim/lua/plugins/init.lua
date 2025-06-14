@@ -2,14 +2,14 @@ return {
 	{
 		"stevearc/conform.nvim",
 		event = "BufWritePre", -- Format on save
-		opts = require "configs.conform",
+		opts = require "custom.configs.conform",
 	},
 
 	{
 		"neovim/nvim-lspconfig",
 		config = function()
 			require("nvchad.configs.lspconfig").defaults()
-			require "configs.lspconfig"
+			require "custom.configs.lspconfig"
 		end,
 	},
 
@@ -39,6 +39,9 @@ return {
 				"rust-analyzer",
 				"yaml-language-server",
 
+				-- DAPs
+				"js-debug-adapter",
+
 				-- Formatters
 				"black",
 				"clang-format",
@@ -48,5 +51,4 @@ return {
 			},
 		},
 	},
-
 }
