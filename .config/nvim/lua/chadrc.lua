@@ -40,6 +40,20 @@ M.nvdash = {
 		"       L e t ' s  A l l  L o v e  L a i n !        ",
 		"                                                   ",
 	},
+	buttons = {
+		{ txt = "─", hl = "NvDashFooter", no_gap = true, rep = true },
+		{
+			txt = function()
+				local stats = require("lazy").stats()
+				local ms = math.floor(stats.startuptime) .. " ms"
+				return "  Loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms
+			end,
+			hl = "NvDashFooter",
+			no_gap = true,
+		},
+		{ txt = "─", hl = "NvDashFooter", no_gap = true, rep = true },
+	},
 }
 
 return M
+
