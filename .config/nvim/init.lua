@@ -39,4 +39,3 @@ require "custom.shell"
 vim.schedule(function()
 	require "custom.mappings"
 end)
-

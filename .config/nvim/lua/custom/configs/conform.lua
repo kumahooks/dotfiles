@@ -17,6 +17,12 @@ local options = {
 		timeout_ms = 500,
 		lsp_fallback = true,
 	},
+
+	formatters = {
+		prettierd = {
+			prepend_args = { "--tab-width", "4", "--use-tabs", "true" },
+		},
+	},
 }
 
 return options

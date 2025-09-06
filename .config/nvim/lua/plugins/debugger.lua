@@ -1,4 +1,6 @@
--- TODO: this is broken need to fix
+return {}
+
+--[[
 return {
 	{
 		"mfussenegger/nvim-dap",
@@ -190,3 +192,4 @@ return {
 		end,
 	},
 }
+]]
