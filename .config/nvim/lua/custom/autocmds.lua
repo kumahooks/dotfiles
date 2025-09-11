@@ -1,4 +1,4 @@
-require "nvchad.autocmds"
+require("nvchad.autocmds")
 
 local autocmds = vim.api.nvim_create_augroup("CustomAutocmds", { clear = true })
 
@@ -10,7 +10,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 })
 
 -- Add new line to the end on save
-vim.api.nvim_create_autocmd("BufWritePre", {
+vim.api.nvim_create_autocmd("BufWritePost", {
 	group = autocmds,
 	pattern = "*",
 	callback = function()

@@ -1,51 +1,60 @@
 return {
+	-- Treesitter
 	{
-		"stevearc/conform.nvim",
-		event = "BufWritePre", -- Format on save
-		opts = require "custom.configs.conform",
-	},
-
-	{
-		"neovim/nvim-lspconfig",
+		"nvim-treesitter/nvim-treesitter",
+		event = { "BufWritePre", "BufNewFile" },
 		config = function()
-			require("nvchad.configs.lspconfig").defaults()
-			require "custom.configs.lspconfig"
+			require("configs.treesitter")
 		end,
 	},
 
+	-- LSP
 	{
-		"mason-org/mason.nvim",
-		opts = {
-			ui = {
-				icons = {
-					package_installed = "✓",
-					package_pending = "➜",
-					package_uninstalled = "✗",
-				},
-			},
-			ensure_installed = {
-				-- LSPs
-				"typescript-language-server",
-				"asm-lsp",
-				"bash-language-server",
-				"clangd",
-				"css-lsp",
-				"gopls",
-				"html-lsp",
-				"json-lsp",
-				"lua-language-server",
-				"marksman",
-				"pyright",
-				"rust-analyzer",
-				"yaml-language-server",
+		"neovim/nvim-lspconfig",
+		event = { "BufReadPre", "BufNewFile" },
+		config = function()
+			require("nvchad.configs.lspconfig").defaults()
+			require("configs.lspconfig")
+		end,
+	},
+	{
+		"mason-org/mason-lspconfig.nvim",
+		event = "VeryLazy",
+		dependencies = { "nvim-lspconfig" },
+		config = function()
+			require("configs.mason-lspconfig")
+		end,
+	},
 
-				-- Formatters
-				"black",
-				"clang-format",
-				"prettier",
-				"prettierd",
-				"stylua",
-			},
-		},
+	-- Lint
+	{
+		"mfussenegger/nvim-lint",
+		event = { "BufReadPre", "BufNewFile" },
+		config = function()
+			require("configs.lint")
+		end,
+	},
+	{
+		"rshkarin/mason-nvim-lint",
+		event = "VeryLazy",
+		dependencies = { "nvim-lint" },
+		config = function()
+			require("configs.mason-lint")
+		end,
+	},
+
+	-- Formatter
+	{
+		"stevearc/conform.nvim",
+		event = "BufWritePre",
+		opts = require("configs.conform"),
+	},
+	{
+		"zapling/mason-conform.nvim",
+		event = "VeryLazy",
+		dependencies = { "conform.nvim" },
+		config = function()
+			require("configs.mason-conform")
+		end,
 	},
 }

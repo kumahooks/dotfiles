@@ -1,15 +1,18 @@
 return {
+	-- Improved Yank/Put
 	{
 		"gbprod/yanky.nvim",
 		opts = {},
 	},
 
+	-- Highlight and search TODOs
 	{
 		"folke/todo-comments.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		opts = {},
 	},
 
+	-- Better way to jump and search around
 	{
 		"folke/flash.nvim",
 		event = "VeryLazy",
@@ -25,62 +28,101 @@ return {
 		},
 	},
 
-	--[[
+	-- Debugger
 	{
-		"folke/trouble.nvim",
-		opts = {},
-		cmd = "Trouble",
-		keys = {
-			{
-				"<leader>xx",
-				"<cmd>Trouble diagnostics toggle<cr>",
-				desc = "Diagnostics (Trouble)",
-			},
-			{
-				"<leader>xX",
-				"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-				desc = "Buffer Diagnostics (Trouble)",
-			},
-			{
-				"<leader>cs",
-				"<cmd>Trouble symbols toggle focus=false<cr>",
-				desc = "Symbols (Trouble)",
-			},
-			{
-				"<leader>cl",
-				"<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
-				desc = "LSP Definitions / references / ... (Trouble)",
-			},
-			{
-				"<leader>xL",
-				"<cmd>Trouble loclist toggle<cr>",
-				desc = "Location List (Trouble)",
-			},
-			{
-				"<leader>xQ",
-				"<cmd>Trouble qflist toggle<cr>",
-				desc = "Quickfix List (Trouble)",
-			},
+		"rcarriga/nvim-dap-ui",
+		event = "VeryLazy",
+		init = function()
+			require("dapui").setup()
+			require("configs.dap")
+			require("dap-go").setup()
+		end,
+		dependencies = {
+			"mfussenegger/nvim-dap",
+			"nvim-neotest/nvim-nio",
+			"leoluz/nvim-dap-go",
 		},
 	},
-	]]
 
+	-- Utilities for Go
 	{
-		"saecki/crates.nvim",
-		tag = "stable",
-		config = function()
-			require("crates").setup()
+		"olexsmir/gopher.nvim",
+		ft = "go",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+			"mfussenegger/nvim-dap",
+		},
+		opts = {},
+	},
+
+	-- Buffer signs for git
+	{
+		"lewis6991/gitsigns.nvim",
+		opts = {},
+	},
+
+	-- Complete
+	{
+		"hrsh7th/nvim-cmp",
+		event = "InsertEnter",
+		dependencies = {
+			{
+				"L3MON4D3/LuaSnip",
+				dependencies = "rafamadriz/friendly-snippets",
+				opts = { history = true, updateevents = "TextChanged,TextChangedI" },
+			},
+			{
+				"windwp/nvim-autopairs",
+				opts = {
+					fast_wrap = {},
+					disable_filetype = { "TelescopePrompt", "vim" },
+				},
+				config = function(_, opts)
+					require("nvim-autopairs").setup(opts)
+
+					local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+					require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
+				end,
+			},
+			"saadparwaiz1/cmp_luasnip",
+			"hrsh7th/cmp-nvim-lua",
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
+		},
+		opts = function()
+			return require("plugins.configs.cmp")
+		end,
+		config = function(_, opts)
+			require("cmp").setup(opts)
 		end,
 	},
 
-	--[[
+	-- (“rainbow parentheses”)
 	{
-		"folke/snacks.nvim",
-		priority = 1000,
-		lazy = false,
-		---@type snacks.Config,
-		opts = {},
+		"HiPhish/rainbow-delimiters.nvim",
+		event = "VeryLazy",
 	},
-	]]
-	--
+
+	-- Rust crates
+	{
+		"saecki/crates.nvim",
+		ft = { "rust", "toml" },
+		config = function(_, opts)
+			local crates = require("crates")
+			crates.setup(opts)
+			crates.show()
+		end,
+	},
+
+	-- Fold scopes like a king
+	{
+		"kevinhwang91/nvim-ufo",
+		dependencies = "kevinhwang91/promise-async",
+		opts = {},
+		config = function()
+			require("configs.ufo")
+		end,
+	},
 }

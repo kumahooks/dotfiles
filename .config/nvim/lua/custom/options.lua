@@ -1,4 +1,4 @@
-require "nvchad.options"
+require("nvchad.options")
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
@@ -39,10 +39,10 @@ opt.wrap = true
 opt.cursorline = true
 
 -- Enable mouse support in all modes
-opt.mouse:append "a"
+opt.mouse:append("a")
 
 -- Use system clipboard for copy/paste
-opt.clipboard:append "unnamedplus"
+opt.clipboard:append("unnamedplus")
 
 -- Default split behavior: open splits below/right
 opt.splitright = true
@@ -76,7 +76,7 @@ opt.fileencodings = "utf-8,gbk,gb18030,gb2312,ucs-bom,cp936,big5,euc-jp,euc-kr"
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "*",
 	callback = function()
-		opt.formatoptions:remove { "c", "r", "o" }
+		opt.formatoptions:remove({ "c", "r", "o" })
 	end,
 })
 
@@ -129,12 +129,12 @@ o.shortmess = "fimnxsTAIcF" -- Compact messages
 
 -- Persistent undo, backup, and view directories
 opt.undofile = true
-opt.undodir = vim.fn.expand "$HOME/.cache/nvim/undo"
-opt.backupdir = vim.fn.expand "$HOME/.cache/nvim/backup"
-opt.viewdir = vim.fn.expand "$HOME/.cache/nvim/view"
+opt.undodir = vim.fn.expand("$HOME/.cache/nvim/undo")
+opt.backupdir = vim.fn.expand("$HOME/.cache/nvim/backup")
+opt.viewdir = vim.fn.expand("$HOME/.cache/nvim/view")
 
 -- LSP logging level
-vim.lsp.set_log_level "info"
+vim.lsp.set_log_level("info")
 
 -- Command and key mapping timeout settings
 o.timeout = true
@@ -156,3 +156,9 @@ o.foldtext = "v:lua.require'lazyvim.util'.ui.foldtext()" -- Custom fold text dis
 
 -- Disable recommended Markdown indentation style
 vim.g.markdown_recommended_style = 0
+
+-- Folds configuration
+vim.o.foldcolumn = "1" -- '0' is not bad
+vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
