@@ -85,6 +85,7 @@ lspconfig.gopls.setup({
 			completeUnimported = true,
 			usePlaceholders = true,
 			staticcheck = true,
+			gofumpt = true,
 		},
 	},
 })
