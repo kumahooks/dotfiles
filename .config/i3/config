@@ -1,3 +1,4 @@
+
 ### Default Configs ###
 
 # Window Titles Fonts
@@ -11,9 +12,9 @@ set $mod Mod4
 set $ws1 ""
 set $ws2 ""
 set $ws3 ""
-set $ws4 ""
+set $ws4 "🎙️"
 set $ws5 "#"
-set $ws6 "🎙️"
+set $ws6 ""
 
 # Default i3 tiling mode
 workspace_layout default
@@ -117,8 +118,9 @@ bindsym $mod+Pause exec amixer sset Capture toggle
 ## App shortcuts
 bindsym $mod+w exec --no-startup-id /usr/bin/librewolf
 bindsym $mod+n exec alacritty -e ranger
-bindsym Print exec --no-startup-id scrot ~/%Y-%m-%d-%T-screenshot.png && notify-send "Screenshot saved to ~/$(date +"%Y-%m-%d-%T")-screenshot.png"
+bindsym Print exec --no-startup-id scrot ~/Pictures/%Y-%m-%d-%T-screenshot.png && notify-send "Screenshot saved to ~/Pictures/$(date +"%Y-%m-%d-%T")-screenshot.png"
 bindsym $mod+Shift+s exec --no-startup-id scrot -s - | xclip -selection clipboard -target image/png && notify-send "Screenshot copied to clipboard"
+bindsym $mod+Shift+a exec --no-startup-id ~/.config/i3/screen-record.sh
 
 # Power Profiles menu switcher (rofi)
 bindsym $mod+Shift+p exec --no-startup-id ~/.config/i3/scripts/power-profiles
@@ -134,7 +136,7 @@ workspace $ws6 output DVI-D-0
 # Bind program to workspace and focus to them on startup:
 assign [class="Alacritty"] $ws2
 assign [class="LibreWolf"] $ws1
-assign [class="discord"] $ws6
+assign [class="discord"] $ws4
 
 # Automatic set focus new window if it opens on another workspace than the current:
 for_window [class=Alacritty] focus
@@ -245,3 +247,4 @@ bindsym $mod+t exec --no-startup-id rofi -show window \
 #exec --no-startup-id greenclip daemon>/dev/null
 #bindsym $mod+c exec --no-startup-id rofi -modi "clipboard:greenclip print" -show clipboard \
 #		-config ~/.config/rofi/rofidmenu.rasi
+
