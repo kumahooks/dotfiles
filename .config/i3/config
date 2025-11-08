@@ -117,7 +117,10 @@ bindsym $mod+Pause exec amixer sset Capture toggle
 
 ## App shortcuts
 bindsym $mod+w exec --no-startup-id /usr/bin/librewolf
+
 bindsym $mod+n exec alacritty -e ranger
+bindsym $mod+m exec alacritty -e ranger /mnt/d
+
 bindsym Print exec --no-startup-id scrot ~/Pictures/%Y-%m-%d-%T-screenshot.png && notify-send "Screenshot saved to ~/Pictures/$(date +"%Y-%m-%d-%T")-screenshot.png"
 bindsym $mod+Shift+s exec --no-startup-id scrot -s - | xclip -selection clipboard -target image/png && notify-send "Screenshot copied to clipboard"
 bindsym $mod+Shift+a exec --no-startup-id ~/.config/i3/screen-record.sh
