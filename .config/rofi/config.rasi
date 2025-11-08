@@ -1,0 +1,13 @@
+@theme "themes/lain.rasi"
+
+configuration {
+	show-icons: true;
+    icon-theme: "Papirus";
+    font: "JetBrainsMono Nerd Font 10";
+    display-drun:        "Apps";
+    drun-display-format: "{name}";
+    disable-history:     false;
+    sidebar-mode:        false;
+	fixed-num-lines: false;
+}
+
