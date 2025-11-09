@@ -4,5 +4,7 @@ end
 
 alias soulseek="LD_PRELOAD=/usr/lib/libfontconfig.so.1 /usr/bin/soulseek"
 
-set -Ux EDITOR nvim
-set -Ux VISUAL nvim
+set -gx EDITOR nvim
+set -gx VISUAL nvim
+
+set -gx PATH $PATH ~/go/bin
