@@ -40,3 +40,7 @@ map("n", "<leader>dr", "<cmd>lua require('dap').continue()<CR>", { desc = "debug
 -- Folds
 map("n", "zR", require("ufo").openAllFolds)
 map("n", "zM", require("ufo").closeAllFolds)
+
+-- Adds semicolon in the end
+map("n", "<C-l>", "A;<Esc>", { desc = "Jump out and add semicolon" })
+map("i", "<C-l>", "<Esc>A;<Esc>", { desc = "Jump out and add semicolon" })
