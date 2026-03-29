@@ -21,4 +21,3 @@ bootctl status                    # systemd-boot status
 ### Notes
 * EFI partition is only 500M and dracut may fail if space is tight. Check df -h /efi before rebuilding initramfs.
 * linux-lts is currently 6.18.x — safe with nvidia-580xx. Monitor AUR for 580xx kernel compatibility before updating. 6.19.x broke graphics, so avoid updating for now.
-```
