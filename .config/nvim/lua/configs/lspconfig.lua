@@ -100,6 +100,7 @@ lspconfig.eslint.setup({
 })
 
 lspconfig.stylelint_lsp.setup({
+	cmd = { "stylelint-language-server", "--stdio" },
 	filetypes = { "css", "scss" },
 	root_dir = lspconfig.util.root_pattern("package.json", ".git"),
 	settings = {
