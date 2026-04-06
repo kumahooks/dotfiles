@@ -21,9 +21,11 @@ else
 	read X Y W H <<< "$REGION"
 
 	# Start ffmpeg in background and save its PID
-	ffmpeg -f x11grab -video_size ${W}x${H} -framerate 25 -i $DISPLAY+${X},${Y} -c:v libx264 -preset fast "$FILENAME" &
+	ffmpeg -f x11grab -video_size ${W}x${H} -framerate 25 -i $DISPLAY+${X},${Y} \
+		-c:v libx264 -preset fast -pix_fmt yuv420p -movflags +faststart \
+		-vf "pad=ceil(iw/2)*2:ceil(ih/2)*2" "$FILENAME" &
+
 	echo $! > "$PID_FILE"
 
 	notify-send "Screen recording started" "\nPress the keybind again to stop"
 fi
-
