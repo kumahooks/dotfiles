@@ -1,4 +1,9 @@
 return {
+	{
+		"folke/which-key.nvim",
+		lazy = false,
+	},
+
 	-- Improved Yank/Put
 	{
 		"gbprod/yanky.nvim",
@@ -30,18 +35,67 @@ return {
 
 	-- Debugger
 	{
-		"rcarriga/nvim-dap-ui",
-		event = "VeryLazy",
-		init = function()
-			require("dapui").setup()
-			require("configs.dap")
-			require("dap-go").setup()
-		end,
+		"mfussenegger/nvim-dap",
 		dependencies = {
-			"mfussenegger/nvim-dap",
-			"nvim-neotest/nvim-nio",
 			"leoluz/nvim-dap-go",
+			"rcarriga/nvim-dap-ui",
+			"nvim-neotest/nvim-nio",
 		},
+		config = function()
+			local dap = require("dap")
+			local ui = require("dapui")
+
+			-- Signs & highlights
+			vim.api.nvim_set_hl(0, "DapBreakpoint", { ctermbg = 0, fg = "#993939", bg = "#31353f" })
+			vim.api.nvim_set_hl(0, "DapLogPoint", { ctermbg = 0, fg = "#61afef", bg = "#31353f" })
+			vim.api.nvim_set_hl(0, "DapStopped", { ctermbg = 0, fg = "#98c379", bg = "#31353f" })
+
+			vim.fn.sign_define("DapBreakpoint", { text = "🔴", texthl = "", linehl = "", numhl = "" })
+			vim.fn.sign_define(
+				"DapBreakpointCondition",
+				{ text = "ﳁ", texthl = "DapBreakpoint", linehl = "DapBreakpoint", numhl = "DapBreakpoint" }
+			)
+			vim.fn.sign_define(
+				"DapBreakpointRejected",
+				{ text = "", texthl = "DapBreakpoint", linehl = "DapBreakpoint", numhl = "DapBreakpoint" }
+			)
+			vim.fn.sign_define(
+				"DapLogPoint",
+				{ text = "", texthl = "DapLogPoint", linehl = "DapLogPoint", numhl = "DapLogPoint" }
+			)
+			vim.fn.sign_define("DapStopped", { text = "", texthl = "DapStopped", linehl = "DapStopped", numhl = "DapStopped" })
+
+			-- Setup extensions (dap-go handles the go adapter + configs)
+			require("dapui").setup()
+			require("dap-go").setup({
+				delve = {
+					path = "/home/kuma/go/bin/dlv",
+					args = { "--check-go-version=false" },
+				},
+				dap_configurations = {
+					{
+						type = "go",
+						name = "Debug Server",
+						request = "launch",
+						program = "${workspaceFolder}/cmd/server/main.go",
+						outputMode = "remote",
+					},
+				},
+			})
+
+			dap.listeners.before.attach.dapui_config = function()
+				ui.open()
+			end
+			dap.listeners.before.launch.dapui_config = function()
+				ui.open()
+			end
+			dap.listeners.before.event_terminated.dapui_config = function()
+				ui.close()
+			end
+			dap.listeners.before.event_exited.dapui_config = function()
+				ui.close()
+			end
+		end,
 	},
 
 	-- Utilities for Go
@@ -109,10 +163,17 @@ return {
 		end,
 	},
 
-	-- (“rainbow parentheses”)
+	-- Rainbow parentheses
 	{
 		"HiPhish/rainbow-delimiters.nvim",
 		event = "VeryLazy",
+		config = function()
+			require("rainbow-delimiters.setup").setup({
+				condition = function(buffer_number)
+					return vim.bo[buffer_number].buftype == ""
+				end,
+			})
+		end,
 	},
 
 	-- Rust crates

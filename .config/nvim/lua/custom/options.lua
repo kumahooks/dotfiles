@@ -1,8 +1,5 @@
 require("nvchad.options")
 
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
 local opt = vim.opt
 local g = vim.g
 local o = vim.o
@@ -139,7 +136,7 @@ vim.lsp.set_log_level("info")
 -- Command and key mapping timeout settings
 o.timeout = true
 o.ttimeoutlen = 50
-o.timeoutlen = 100
+o.timeoutlen = 500
 
 -- Shell providers - disable unused ones
 g.loaded_python3_provider = 0

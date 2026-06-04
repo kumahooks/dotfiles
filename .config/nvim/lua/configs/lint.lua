@@ -2,6 +2,8 @@ local lint = require("lint")
 
 lint.linters_by_ft = {
 	lua = { "luacheck" },
+	css = { "stylelint" },
+	scss = { "stylelint" },
 }
 
 lint.linters.luacheck.args = {

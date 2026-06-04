@@ -1,4 +1,7 @@
 local options = {
+	git = {
+		ignore = false,
+	},
 	view = {
 		adaptive_size = true,
 	},

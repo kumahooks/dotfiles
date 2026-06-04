@@ -11,13 +11,13 @@ local servers = {
 	"clangd",
 	"pyright",
 	"jsonls",
-	"html",
 	"cssls",
 	"bashls",
 	"yamlls",
 	"marksman",
-	"asm_lsp",
 	"lua_ls",
+	"templ",
+	"stylelint_lsp",
 }
 
 lspconfig.servers = servers
@@ -37,12 +37,14 @@ for _, server in ipairs(servers) do
 		}
 	end
 
-	lspconfig[server_name].setup({
-		on_attach = on_attach,
-		on_init = on_init,
-		capabilities = capabilities,
-		filetypes = server_opts.filetypes or lspconfig[server_name].filetypes,
-	})
+	if server_name ~= "stylelint_lsp" then
+		lspconfig[server_name].setup({
+			on_attach = on_attach,
+			on_init = on_init,
+			capabilities = capabilities,
+			filetypes = server_opts.filetypes or lspconfig[server_name].filetypes,
+		})
+	end
 end
 
 lspconfig.lua_ls.setup({

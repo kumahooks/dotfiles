@@ -1,8 +1,9 @@
 -- Directory for caching theme files
 vim.g.base46_cache = vim.fn.stdpath("data") .. "/base46/"
 
--- Sets leader key to <Space>
+-- Sets leader keys to <Space>
 vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 -- bootstrap lazy and all plugins
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -36,7 +37,4 @@ dofile(vim.g.base46_cache .. "statusline")
 require("custom.options")
 require("custom.autocmds")
 require("custom.shell")
-
-vim.schedule(function()
-	require("custom.mappings")
-end)
+require("custom.mappings")

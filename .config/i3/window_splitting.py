@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import i3ipc
-from threading import Timer
 
 def find_parent(i3, window_id):
     """
@@ -47,3 +46,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
