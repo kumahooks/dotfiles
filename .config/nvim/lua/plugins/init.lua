@@ -10,7 +10,7 @@ return {
 	-- Treesitter
 	{
 		"nvim-treesitter/nvim-treesitter",
-		event = { "BufWritePre", "BufNewFile" },
+		event = { "BufReadPost", "BufNewFile" },
 		config = function()
 			require("configs.treesitter")
 		end,

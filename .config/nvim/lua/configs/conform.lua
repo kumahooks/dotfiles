@@ -2,9 +2,18 @@ local options = {
 	formatters_by_ft = {
 		lua = { "stylua" },
 		go = { "goimports-reviser", "gofumpt", "golines" },
+		c = { "clang-format" },
+		cpp = { "clang-format" },
 	},
 
 	formatters = {
+		-- C/C++
+		["clang-format"] = {
+			prepend_args = {
+				"--style={BasedOnStyle: LLVM, UseTab: Always, IndentWidth: 4, TabWidth: 4}",
+			},
+		},
+
 		-- Golang
 		["goimports-reviser"] = {
 			prepend_args = { "-rm-unused" },
@@ -47,7 +56,7 @@ local options = {
 
 	format_on_save = {
 		timeout_ms = 500,
-		lsp_fallback = true,
+		lsp_format = "fallback",
 	},
 }
 

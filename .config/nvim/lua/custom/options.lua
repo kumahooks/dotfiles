@@ -24,6 +24,7 @@ opt.updatetime = 50
 o.tabstop = 4
 o.expandtab = false
 o.shiftwidth = 4
+o.softtabstop = 4
 
 -- Line Number
 opt.relativenumber = true
