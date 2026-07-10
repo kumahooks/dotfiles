@@ -116,6 +116,7 @@ bindsym $mod+Next exec --no-startup-id ~/.config/i3/scripts/volume_brightness.sh
 
 # Mic mute toggle $mod+Pause
 bindsym $mod+Pause exec amixer sset Capture toggle
+bindsym $mod+F1 exec --no-startup-id ~/.config/i3/scripts/fix-mic
 
 ## App shortcuts
 bindsym $mod+w exec --no-startup-id /usr/bin/librewolf

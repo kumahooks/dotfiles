@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -u
+
+if amixer -c0 sset 'Front Mic Boost' 1 >/dev/null && amixer -c0 sset Capture 32 >/dev/null; then
+	notify-send "Mic fixed" "Front Mic Boost 10 dB, Capture 70%" >/dev/null 2>&1 || true
+	exit 0
+fi
+
+notify-send "Mic fix failed" "Could not set ALSA capture values" >/dev/null 2>&1 || true
+exit 1

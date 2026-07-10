@@ -24,10 +24,10 @@ lspconfig.servers = servers
 
 for _, server in ipairs(servers) do
 	local server_name = type(server) == "string" and server or server[1]
-	local server_opts = type(server) == "string" and {} or server[2]
+	local server_options = type(server) == "string" and {} or server[2]
 
 	if server_name == "ts_ls" then
-		server_opts.filetypes = {
+		server_options.filetypes = {
 			"javascript",
 			"javascriptreact",
 			"javascript.jsx",
@@ -37,14 +37,12 @@ for _, server in ipairs(servers) do
 		}
 	end
 
-	if server_name ~= "stylelint_lsp" then
-		lspconfig[server_name].setup({
-			on_attach = on_attach,
-			on_init = on_init,
-			capabilities = capabilities,
-			filetypes = server_opts.filetypes or lspconfig[server_name].filetypes,
-		})
-	end
+	lspconfig[server_name].setup({
+		on_attach = on_attach,
+		on_init = on_init,
+		capabilities = capabilities,
+		filetypes = server_options.filetypes or lspconfig[server_name].filetypes,
+	})
 end
 
 lspconfig.lua_ls.setup({
@@ -97,23 +95,6 @@ lspconfig.eslint.setup({
 		vim.api.nvim_create_autocmd("BufWritePre", {
 			buffer = bufnr,
 			command = "EslintFixAll",
-		})
-	end,
-})
-
-lspconfig.stylelint_lsp.setup({
-	cmd = { "stylelint-language-server", "--stdio" },
-	filetypes = { "css", "scss" },
-	root_dir = lspconfig.util.root_pattern("package.json", ".git"),
-	settings = {
-		stylelintplus = {},
-	},
-	on_attach = function(_, buffer)
-		vim.api.nvim_create_autocmd("BufWritePre", {
-			buffer = buffer,
-			callback = function()
-				vim.lsp.buf.format()
-			end,
 		})
 	end,
 })

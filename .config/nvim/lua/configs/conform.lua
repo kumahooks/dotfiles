@@ -10,7 +10,7 @@ local options = {
 		-- C/C++
 		["clang-format"] = {
 			prepend_args = {
-				"--style={BasedOnStyle: LLVM, UseTab: Always, IndentWidth: 4, TabWidth: 4}",
+				"--style={BasedOnStyle: LLVM, UseTab: Always, IndentWidth: 4, TabWidth: 4, PointerAlignment: Left, BreakBeforeBraces: Custom, BraceWrapping: {AfterFunction: true}}",
 			},
 		},
 
