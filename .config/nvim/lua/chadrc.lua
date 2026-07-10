@@ -7,6 +7,7 @@ local M = {}
 M.base46 = {
 	theme = "yoru",
 	transparency = true,
+	integrations = { "semantic_tokens" },
 
 	hl_override = {
 		Comment = { italic = true },

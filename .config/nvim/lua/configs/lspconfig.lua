@@ -1,8 +1,15 @@
-local on_attach = require("nvchad.configs.lspconfig").on_attach
-local on_init = require("nvchad.configs.lspconfig").on_init
-local capabilities = require("nvchad.configs.lspconfig").capabilities
+local nvchad_lspconfig = require("nvchad.configs.lspconfig")
+local on_attach = nvchad_lspconfig.on_attach
+local on_init = nvchad_lspconfig.on_init
+local capabilities = nvchad_lspconfig.capabilities
 
-local lspconfig = require("lspconfig")
+pcall(function()
+	local semantic_token_highlights = require("base46").get_integration("semantic_tokens")
+
+	for highlight_group, highlight_options in pairs(semantic_token_highlights) do
+		vim.api.nvim_set_hl(0, highlight_group, highlight_options)
+	end
+end)
 
 local servers = {
 	"ts_ls",
@@ -15,41 +22,22 @@ local servers = {
 	"bashls",
 	"yamlls",
 	"marksman",
-	"lua_ls",
 	"templ",
-	"stylelint_lsp",
 }
 
-lspconfig.servers = servers
+-- Apply capabilities and on_init to all servers (merges with NvChad's global config)
+vim.lsp.config("*", {
+	capabilities = capabilities,
+	on_init = on_init,
+})
 
-for _, server in ipairs(servers) do
-	local server_name = type(server) == "string" and server or server[1]
-	local server_options = type(server) == "string" and {} or server[2]
-
-	if server_name == "ts_ls" then
-		server_options.filetypes = {
-			"javascript",
-			"javascriptreact",
-			"javascript.jsx",
-			"typescript",
-			"typescriptreact",
-			"typescript.tsx",
-		}
-	end
-
-	lspconfig[server_name].setup({
-		on_attach = on_attach,
-		on_init = on_init,
-		capabilities = capabilities,
-		filetypes = server_options.filetypes or lspconfig[server_name].filetypes,
-	})
+-- Enable servers that use defaults
+for _, server_name in ipairs(servers) do
+	vim.lsp.enable(server_name)
 end
 
-lspconfig.lua_ls.setup({
-	on_attach = on_attach,
-	on_init = on_init,
-	capabilities = capabilities,
-
+-- Override lua_ls settings (merges with NvChad's lua_ls config)
+vim.lsp.config("lua_ls", {
 	settings = {
 		Lua = {
 			diagnostics = {
@@ -63,19 +51,14 @@ lspconfig.lua_ls.setup({
 	},
 })
 
-lspconfig.gopls.setup({
-	on_attach = function(client, bufnr) -- Disables gopls format as we use gofumpt
+-- Override gopls: disable formatting (use gofumpt via conform), add settings
+vim.lsp.config("gopls", {
+	on_attach = function(client, bufnr)
 		client.server_capabilities.documentFormattingProvider = false
 		client.server_capabilities.documentRangeFormattingProvider = false
 		on_attach(client, bufnr)
 	end,
-	on_init = on_init,
-	capabilities = capabilities,
-
-	cmd = { "gopls" },
-	filetypes = { "go", "gomod", "gotmpl", "gowork" },
-	root_dir = lspconfig.util.root_pattern("go.work", "go.mod", ".git"),
-
+	on_init = function() end,
 	settings = {
 		gopls = {
 			analyses = {
@@ -90,11 +73,17 @@ lspconfig.gopls.setup({
 	},
 })
 
-lspconfig.eslint.setup({
-	on_attach = function(_, bufnr)
+-- Override eslint: format on save
+local base_eslint_on_attach = vim.lsp.config.eslint.on_attach
+vim.lsp.config("eslint", {
+	on_attach = function(client, bufnr)
+		if base_eslint_on_attach then
+			base_eslint_on_attach(client, bufnr)
+		end
 		vim.api.nvim_create_autocmd("BufWritePre", {
 			buffer = bufnr,
 			command = "EslintFixAll",
 		})
 	end,
 })
+

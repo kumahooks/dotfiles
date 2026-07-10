@@ -63,7 +63,10 @@ return {
 				"DapLogPoint",
 				{ text = "", texthl = "DapLogPoint", linehl = "DapLogPoint", numhl = "DapLogPoint" }
 			)
-			vim.fn.sign_define("DapStopped", { text = "", texthl = "DapStopped", linehl = "DapStopped", numhl = "DapStopped" })
+			vim.fn.sign_define(
+				"DapStopped",
+				{ text = "", texthl = "DapStopped", linehl = "DapStopped", numhl = "DapStopped" }
+			)
 
 			-- Setup extensions (dap-go handles the go adapter + configs)
 			require("dapui").setup()
@@ -132,11 +135,6 @@ return {
 		event = "InsertEnter",
 		dependencies = {
 			{
-				"L3MON4D3/LuaSnip",
-				dependencies = "rafamadriz/friendly-snippets",
-				opts = { history = true, updateevents = "TextChanged,TextChangedI" },
-			},
-			{
 				"windwp/nvim-autopairs",
 				opts = {
 					fast_wrap = {},
@@ -149,7 +147,6 @@ return {
 					require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
 				end,
 			},
-			"saadparwaiz1/cmp_luasnip",
 			"hrsh7th/cmp-nvim-lua",
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-buffer",
@@ -160,19 +157,6 @@ return {
 		end,
 		config = function(_, opts)
 			require("cmp").setup(opts)
-		end,
-	},
-
-	-- Rainbow parentheses
-	{
-		"HiPhish/rainbow-delimiters.nvim",
-		event = "VeryLazy",
-		config = function()
-			require("rainbow-delimiters.setup").setup({
-				condition = function(buffer_number)
-					return vim.bo[buffer_number].buftype == ""
-				end,
-			})
 		end,
 	},
 
