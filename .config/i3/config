@@ -52,7 +52,7 @@ bindsym $mod+Return exec kitty --title "Kitty-Terminal"
 
 # Kill focused window
 bindsym $mod+q kill
-bindsym $mod+Shift+q exec --no-startup-id pkill -9 -f "$(xdotool getwindowfocus getwindowclassname)"
+bindsym $mod+Shift+q exec --no-startup-id ~/.config/i3/scripts/kill-focused
 
 # Reload the configuration file
 bindsym $mod+Shift+c reload
