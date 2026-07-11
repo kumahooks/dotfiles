@@ -111,8 +111,8 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 
 # Volume control with $mod+page up/$mod+page down
-bindsym $mod+Prior exec --no-startup-id ~/.config/i3/scripts/volume_brightness.sh volume_up
-bindsym $mod+Next exec --no-startup-id ~/.config/i3/scripts/volume_brightness.sh volume_down
+bindsym $mod+Prior exec --no-startup-id ~/.config/i3/scripts/volume_brightness volume_up
+bindsym $mod+Next exec --no-startup-id ~/.config/i3/scripts/volume_brightness volume_down
 
 # Mic mute toggle $mod+Pause
 bindsym $mod+Pause exec amixer sset Capture toggle
@@ -128,7 +128,7 @@ bindsym $mod+m exec kitty yazi /mnt/d
 ## Screen Recording/Screenshot utility
 bindsym Print exec --no-startup-id scrot ~/Pictures/%Y-%m-%d-%T-screenshot.png && notify-send "Screenshot saved to ~/Pictures/$(date +"%Y-%m-%d-%T")-screenshot.png"
 bindsym $mod+Shift+s exec --no-startup-id scrot -s - | xclip -selection clipboard -target image/png && notify-send "Screenshot copied to clipboard"
-bindsym $mod+Shift+a exec --no-startup-id ~/.config/i3/screen-record.sh
+bindsym $mod+Shift+a exec --no-startup-id ~/.config/i3/screen-record
 
 # Power Profiles menu switcher (rofi)
 bindsym $mod+Shift+p exec --no-startup-id ~/.config/i3/scripts/power-profiles
