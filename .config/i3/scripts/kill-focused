@@ -1,0 +1,7 @@
+#!/bin/sh
+# Kill the process group of the currently focused window.
+pid=$(xdotool getwindowfocus getwindowpid 2>/dev/null)
+[ -z "$pid" ] && exit 0
+pgid=$(ps -o pgid= -p "$pid" | tr -d " ")
+[ -z "$pgid" ] && exit 0
+kill -9 -- -"$pgid" 2>/dev/null
