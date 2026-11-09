@@ -1,0 +1,5 @@
+#!/bin/sh
+maim -s -m 1 /tmp/screenshot.png
+pkill -f "xclip -selection clipboard"
+xclip -selection clipboard -target image/png /tmp/screenshot.png
+notify-send "Screenshot copied to clipboard"

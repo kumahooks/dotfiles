@@ -8,12 +8,16 @@ set $mod Mod4
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 ""
-set $ws2 ""
-set $ws3 ""
-set $ws4 "🎙️"
-set $ws5 "#"
-set $ws6 ""
+set $ws1 "1: "
+set $ws2 "2: "
+set $ws3 "3: "
+set $ws4 "4"
+set $ws5 "5: 🎙️"
+set $ws6 "6: #"
+set $ws7 "7: "
+set $ws8 "8"
+set $ws9 "9"
+set $ws0 "10: 0"
 
 # Default i3 tiling mode
 workspace_layout default
@@ -38,6 +42,10 @@ bindcode $mod+12 workspace $ws3
 bindcode $mod+13 workspace $ws4
 bindcode $mod+14 workspace $ws5
 bindcode $mod+15 workspace $ws6
+bindcode $mod+16 workspace $ws7
+bindcode $mod+17 workspace $ws8
+bindcode $mod+18 workspace $ws9
+bindcode $mod+19 workspace $ws0
 
 # Move focused container to workspace
 bindcode $mod+Shift+10 move container to workspace  $ws1
@@ -46,6 +54,10 @@ bindcode $mod+Shift+12 move container to workspace  $ws3
 bindcode $mod+Shift+13 move container to workspace  $ws4
 bindcode $mod+Shift+14 move container to workspace  $ws5
 bindcode $mod+Shift+15 move container to workspace  $ws6
+bindcode $mod+Shift+16 move container to workspace  $ws7
+bindcode $mod+Shift+17 move container to workspace  $ws8
+bindcode $mod+Shift+18 move container to workspace  $ws9
+bindcode $mod+Shift+19 move container to workspace  $ws0
 
 # Start terminal
 bindsym $mod+Return exec kitty --title "Kitty-Terminal"
@@ -99,7 +111,6 @@ bindsym $mod+f fullscreen toggle
 # Change container layout
 bindsym $mod+s layout stacking
 bindsym $mod+g layout tabbed
-bindsym $mod+e layout toggle split
 
 # Toggle tiling/floating
 bindsym $mod+Shift+space floating toggle
@@ -125,13 +136,13 @@ bindsym $mod+w exec --no-startup-id /usr/bin/librewolf
 bindsym $mod+n exec kitty yazi /home/kuma
 bindsym $mod+m exec kitty yazi /mnt/d
 
+# Aerc Email Client
+bindsym $mod+e exec kitty aerc
+
 ## Screen Recording/Screenshot utility
 bindsym Print exec --no-startup-id scrot ~/Pictures/%Y-%m-%d-%T-screenshot.png && notify-send "Screenshot saved to ~/Pictures/$(date +"%Y-%m-%d-%T")-screenshot.png"
-bindsym $mod+Shift+s exec --no-startup-id scrot -s - | xclip -selection clipboard -target image/png && notify-send "Screenshot copied to clipboard"
-bindsym $mod+Shift+a exec --no-startup-id ~/.config/i3/screen-record
-
-# Power Profiles menu switcher (rofi)
-bindsym $mod+Shift+p exec --no-startup-id ~/.config/i3/scripts/power-profiles
+bindsym $mod+Shift+s exec --no-startup-id ~/.config/i3/scripts/screenshot-clipboard
+bindsym $mod+Shift+a exec --no-startup-id ~/.config/i3/scripts/screen-record
 
 # Lock screen
 bindsym $mod+l exec --no-startup-id i3lock -i /home/kuma/Pictures/lain/lain-lock.png -t
@@ -143,14 +154,18 @@ bindsym Control+F12 exec i3-msg exit
 workspace $ws1 output HDMI-0
 workspace $ws2 output HDMI-0
 workspace $ws3 output HDMI-0
-workspace $ws4 output DVI-D-0
+workspace $ws4 output HDMI-0
 workspace $ws5 output DVI-D-0
 workspace $ws6 output DVI-D-0
+workspace $ws7 output DVI-D-0
+workspace $ws8 output HDMI-0
+workspace $ws9 output HDMI-0
+workspace $ws0 output HDMI-0
 
 # Bind program to workspace and focus to them on startup:
 assign [title="Kitty-Terminal"] $ws2
 assign [class="LibreWolf"] $ws1
-assign [class="discord"] $ws4
+assign [class="discord"] $ws5
 
 # Automatic set focus new window if it opens on another workspace than the current:
 for_window [title="Kitty-Terminal"] focus
