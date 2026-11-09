@@ -4,20 +4,19 @@ local options = {
 		go = { "goimports-reviser", "gofumpt", "golines" },
 		c = { "clang-format" },
 		cpp = { "clang-format" },
+		zig = { "zigfmt" },
 	},
 
 	formatters = {
 		-- C/C++
 		["clang-format"] = {
 			prepend_args = {
-				"--style={BasedOnStyle: LLVM, UseTab: Always, IndentWidth: 4, TabWidth: 4, PointerAlignment: Left, BreakBeforeBraces: Custom, BraceWrapping: {AfterFunction: true}}",
+				"--style={BasedOnStyle: LLVM, UseTab: Always, IndentWidth: 4, TabWidth: 4, PointerAlignment: Left, BreakBeforeBraces: Custom, BraceWrapping: {AfterFunction: true}, ColumnLimit: 0}",
 			},
 		},
 
 		-- Golang
-		["goimports-reviser"] = {
-			prepend_args = { "-rm-unused" },
-		},
+		["goimports-reviser"] = {},
 		golines = {
 			prepend_args = { "--max-len=120" },
 		},

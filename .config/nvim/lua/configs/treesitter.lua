@@ -27,6 +27,7 @@ local filetypes = {
 	"vim",
 	"vimdoc",
 	"yaml",
+	"zig",
 }
 
 local treesitter_install_path = vim.fn.stdpath("data") .. "/site"

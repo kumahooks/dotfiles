@@ -23,6 +23,7 @@ local servers = {
 	"yamlls",
 	"marksman",
 	"templ",
+	"zls",
 }
 
 -- Apply capabilities and on_init to all servers (merges with NvChad's global config)

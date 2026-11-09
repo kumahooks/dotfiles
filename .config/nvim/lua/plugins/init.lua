@@ -36,6 +36,17 @@ return {
 		end,
 	},
 
+	-- LuaSnip: drop TextChangedI from update events. NvChad enables
+	-- "TextChanged,TextChangedI" and LuaSnip's pos_begin_end_raw crashes on a
+	-- stale extmark while typing. See L3MON4D3/LuaSnip#1224.
+	{
+		"L3MON4D3/LuaSnip",
+		opts = function(_, opts)
+			opts.updateevents = "TextChanged,InsertLeave"
+			return opts
+		end,
+	},
+
 	-- Lint
 	{
 		"mfussenegger/nvim-lint",

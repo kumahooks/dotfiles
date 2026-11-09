@@ -59,6 +59,23 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
+-- ZLS code actions on save: apply all auto-fixes, then organize imports.
+-- See https://zigtools.org/zls/editors/vim/nvim/
+vim.api.nvim_create_autocmd("BufWritePre", {
+	group = autocmds,
+	pattern = { "*.zig", "*.zon" },
+	callback = function()
+		vim.lsp.buf.code_action({
+			context = { only = { "source.fixAll" } },
+			apply = true,
+		})
+		vim.lsp.buf.code_action({
+			context = { only = { "source.organizeImports" } },
+			apply = true,
+		})
+	end,
+})
+
 -- Remove trailing whitespaces on save
 vim.api.nvim_create_autocmd("BufWritePre", {
 	group = autocmds,

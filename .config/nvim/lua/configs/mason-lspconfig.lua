@@ -12,6 +12,7 @@ local servers = {
 	"lua_ls",
 	"templ",
 	"eslint",
+	"zls",
 }
 
 require("mason-lspconfig").setup({
