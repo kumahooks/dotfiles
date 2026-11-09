@@ -1,7 +1,8 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
 SETUVAR --export EDITOR:nvim
+SETUVAR --export OLLAMA_API_KEY:REDACTED
 SETUVAR --export VISUAL:nvim
 SETUVAR __fish_initialized:4300
-SETUVAR fish_user_paths:/home/kuma/\x2eopencode/bin
+SETUVAR fish_user_paths:/home/kuma/opt/llvm22/bin\x1e/home/kuma/\x2eopencode/bin
 
