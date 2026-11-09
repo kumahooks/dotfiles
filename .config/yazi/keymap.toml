@@ -19,7 +19,5 @@ run = [ 'shell -- echo "$@" | xclip -i -selection clipboard -t text/uri-list', "
 
 [[mgr.prepend_keymap]]
 on = [ "<C-n>" ]
-run = '''
-    shell 'ripdrag "$@" -x 2>/dev/null &' --confirm
-'''
+run = 'shell "ripdrag %s -x 2>/dev/null &" --confirm'
 
