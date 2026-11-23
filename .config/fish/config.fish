@@ -1,5 +1,7 @@
 if status is-interactive
     # Commands to run in interactive sessions can go here
+    bind \eo opencode
+    bind \ee 'nvim .'
 end
 
 alias clear='clear && printf "\e[3J"'
