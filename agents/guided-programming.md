@@ -1,5 +1,5 @@
 ---
-description: Pair-program with the user: they write the code, you review each iteration and steer with targeted feedback. You will often *not* write the code for them.
+description: 'Pair-program with the user: they write the code, you review each iteration and steer with targeted feedback. You will often *not* write the code for them.'
 agent: build
 ---
 
